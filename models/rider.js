@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const {Schema} = mongoose;
 
 
-const adminScheme = new Schema({
+const riderScheme = new Schema({
     name:{
         type:String,
         required:true
@@ -22,22 +22,22 @@ const adminScheme = new Schema({
 });
 
 //hlo
-adminScheme.pre('save',async function (next){
+riderScheme.pre('save',async function (next){
     const salt = await bycrypt.genSalt(10);
     this.password = await bycrypt.hash(this.password,salt);
     next();
 })
 
 //compared password
-adminScheme.methods.comparePassword = async function (enteredPassword)
+riderScheme.methods.comparePassword = async function (enteredPassword)
 {
     return await bycrypt.compare(enteredPassword,this.password);
 }
 
 //JWT Token
-adminScheme.methods.getJWTToken = function ()
+riderScheme.methods.getJWTToken = function ()
 {
     return jwt.sign(this._id.toString(),process.env.JWT_SECRET);
 }
 
-module.exports = mongoose.model("Admin",adminScheme);
+module.exports = mongoose.model("rider",riderScheme);
