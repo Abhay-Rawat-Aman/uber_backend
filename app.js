@@ -12,9 +12,9 @@ app.use(cors())
 app.use(express.json())
 
 //Route Import
-//const admin = require('./routes/adminRoutes')
+const rider = require('./routes/riderRoutes')
 
-//app.use("/api",seat);
+app.use("/api",rider);
 
 if(process.env.NODE_ENV==="PRODUCTION"){
     app.use(express.static(path.join(__dirname,"../build")));

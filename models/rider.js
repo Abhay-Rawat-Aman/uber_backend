@@ -4,9 +4,16 @@ const jwt = require('jsonwebtoken')
 
 const {Schema} = mongoose;
 
-
 const riderScheme = new Schema({
-    name:{
+    fname:{
+        type:String,
+        required:true
+    },
+    lname:{
+        type:String,
+        required:true
+    },
+    mobile:{
         type:String,
         required:true
     },
